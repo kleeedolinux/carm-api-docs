@@ -1,0 +1,150 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sauce to Create a Browser Support for VoidWeb: A VoidWeb Browser in a Nutshell</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .dark-mode {
+            background-color: #1a202c;
+            color: #cbd5e0;
+        }
+        .light-mode {
+            background-color: #f7fafc;
+            color: #2d3748;
+        }
+        .sidebar {
+            transition: transform 0.3s;
+        }
+        .sidebar a {
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #4a5568;
+            transform: translateX(10px);
+        }
+        .toggle-btn {
+            transition: transform 0.3s;
+        }
+        .toggle-btn:hover {
+            transform: rotate(180deg);
+        }
+        pre {
+            background-color: #2d3748;
+            color: #cbd5e0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .content {
+            opacity: 0;
+            animation: fadeIn 1s forwards, slideIn 1s forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+        .sidebar-hidden {
+            transform: translateX(-100%);
+        }
+        .sidebar-visible {
+            transform: translateX(0);
+        }
+        @media (min-width: 768px) {
+            .sidebar {
+                transform: translateX(0) !important;
+            }
+        }
+    </style>
+</head>
+<body class="light-mode">
+
+    <div class="fixed top-4 right-4 z-50 flex space-x-4">
+        <i class="fas fa-bars text-2xl cursor-pointer md:hidden" id="menu-toggle"></i>
+        <i class="fas fa-adjust text-2xl cursor-pointer" id="theme-toggle"></i>
+    </div>
+
+    <div class="sidebar fixed top-0 left-0 h-full w-64 bg-gray-800 text-white p-4 sidebar-hidden md:sidebar-visible">
+        <h2 class="text-2xl font-bold mb-4"><i class="fas fa-book mr-2"></i>Navigation</h2>
+        <a href="#introduction" class="block py-2 px-4 rounded"><i class="fas fa-info-circle mr-2"></i>Introduction</a>
+        <a href="#carm-vs-carm-browser" class="block py-2 px-4 rounded"><i class="fas fa-exchange-alt mr-2"></i>Carm vs Carm Browser</a>
+        <a href="#ip-returned" class="block py-2 px-4 rounded"><i class="fas fa-network-wired mr-2"></i>IP Returned: IP vs GitHub</a>
+        <a href="#github-logic" class="block py-2 px-4 rounded"><i class="fab fa-github mr-2"></i>GitHub Logic</a>
+        <a href="#ip-logic" class="block py-2 px-4 rounded"><i class="fas fa-server mr-2"></i>IP Logic</a>
+        <a href="#custom-functions" class="block py-2 px-4 rounded"><i class="fas fa-cogs mr-2"></i>Creating Custom Functions</a>
+        <a href="#navigation-standards" class="block py-2 px-4 rounded"><i class="fas fa-compass mr-2"></i>Void Web Navigation Standards</a>
+        <a href="#dns-management" class="block py-2 px-4 rounded"><i class="fas fa-globe mr-2"></i>ErebusAPI: DNS Management</a>
+        <a href="#advantages" class="block py-2 px-4 rounded"><i class="fas fa-thumbs-up mr-2"></i>Advantages of Void Web Standards</a>
+    </div>
+
+    <div class="content ml-0 md:ml-64 p-8 space-y-8">
+        <h1 id="introduction" class="text-4xl font-bold mb-6"><i class="fas fa-book-open mr-2"></i>The Sauce to Create a Browser Support for VoidWeb: A VoidWeb Browser in a Nutshell</h1>
+
+        <h2 class="text-2xl font-semibold mb-4"><i class="fas fa-info-circle mr-2"></i>1. Introduction</h2>
+        <p>The Void Web is a network that uses the <code>vd://</code> addressing scheme, with specific protocols and APIs for processing URLs and navigation. This documentation explores the functioning of Carm and Carm Browser, the Void Web navigation standards, and the importance of ErebusAPI for DNS resolution. Understanding these components is crucial for developing and maintaining a browser that supports the Void Web, ensuring seamless navigation and content delivery.</p>
+
+        <h2 id="carm-vs-carm-browser" class="text-2xl font-semibold mb-4"><i class="fas fa-exchange-alt mr-2"></i>2. Carm vs Carm Browser</h2>
+        <p>Carm is an algorithm that processes and interprets URLs in the Void Web, while Carm Browser is an application that uses Carm to navigate these URLs. While Carm manages the logic for retrieving IPs and GitHub links for Void Web URLs, Carm Browser displays the content returned to the user. This separation of concerns allows for a modular approach to Void Web navigation, where Carm handles the backend logic and Carm Browser focuses on the user interface and experience.</p>
+
+        <h2 id="ip-returned" class="text-2xl font-semibold mb-4"><i class="fas fa-network-wired mr-2"></i>3. IP Returned: IP vs GitHub</h2>
+        <p>Carm uses the ErebusAPI to determine the destination of a URL. The ErebusAPI responds with a value based on the resource type:</p>
+        <ul class="list-disc list-inside mb-2">
+            <li><strong>IP Returned IP:</strong> If the URL is an IP, Carm directs Carm Browser to the specific IP returned by ErebusAPI. This allows for direct access to servers on the Void Web, providing a fast and efficient way to retrieve content.</li>
+            <li><strong>IP Returned GitHub:</strong> If the URL is a GitHub repository, Carm Browser accesses the content in the repository as returned. This enables the use of GitHub as a content delivery network for Void Web applications, leveraging its robust infrastructure and version control capabilities.</li>
+        </ul>
+
+        <h2 id="github-logic" class="text-2xl font-semibold mb-4"><i class="fab fa-github mr-2"></i>4. GitHub Logic</h2>
+        <p>When ErebusAPI returns a GitHub repository URL, Carm must access the repository structure, starting with the <code>index.html</code> file as the required entry point. This structure allows Carm Browser to display the project's or application's home page. By adhering to this convention, developers can ensure that their projects are easily accessible and navigable within the Void Web ecosystem.</p>
+
+        <h2 id="ip-logic" class="text-2xl font-semibold mb-4"><i class="fas fa-server mr-2"></i>5. IP Logic</h2>
+        <p>If ErebusAPI returns an IP, Carm redirects Carm Browser directly to this address. This IP represents an active server on the Void Web, which is directly accessible without intermediaries. This direct access model is ideal for real-time applications and services that require low latency and high performance.</p>
+
+        <h2 id="custom-functions" class="text-2xl font-semibold mb-4"><i class="fas fa-cogs mr-2"></i>6. Creating Custom Functions (Example: GitLab)</h2>
+        <p>Although Carm natively supports GitHub, you can create custom functions for integration with other services, such as GitLab. To do this, adapt Carm's logic to access the GitLab repository as needed. However, we recommend using the default systems (GitHub and IPs) supported by the Void Web for maximum compatibility. Custom functions should be thoroughly tested to ensure they adhere to Void Web standards and provide a seamless user experience.</p>
+
+        <h2 id="navigation-standards" class="text-2xl font-semibold mb-4"><i class="fas fa-compass mr-2"></i>7. Void Web Navigation Standards</h2>
+        <p>The Void Web has navigation standards that must be followed to ensure compatibility:</p>
+        <ul class="list-disc list-inside mb-2">
+            <li><strong>Initial File:</strong> The browser must always request <code>index.html</code> as the primary entry point. This ensures a consistent starting point for all Void Web applications, simplifying navigation and content delivery.</li>
+            <li><strong>ErebusAPI:</strong> All Void Web URLs must pass through ErebusAPI for DNS resolution and proper routing. This centralized approach to DNS management enhances security and reliability, ensuring that all URLs are correctly resolved and routed to their intended destinations.</li>
+        </ul>
+
+        <h2 id="dns-management" class="text-2xl font-semibold mb-4"><i class="fas fa-globe mr-2"></i>8. ErebusAPI: DNS Management</h2>
+        <p>The <strong>ErebusAPI</strong> is the DNS resolution API of the Void Web. When a <code>vd://domain.tld</code> URL is requested, Carm queries ErebusAPI using the format <code>http://localhost:4567/&lt;dn&gt;/&lt;tld&gt;/ip</code>. The API returns an IP or a GitHub link for the Browser to display the appropriate content. This API is a critical component of the Void Web, providing the necessary infrastructure for URL resolution and content delivery.</p>
+
+        <h2 id="advantages" class="text-2xl font-semibold mb-4"><i class="fas fa-thumbs-up mr-2"></i>9. Advantages of Void Web Standards</h2>
+        <p>Void Web standards provide several key advantages:</p>
+        <ul class="list-disc list-inside mb-2">
+            <li><strong>Consistency and Compatibility:</strong> Ensures a uniform experience across any browser or tool using the Void Web. By adhering to these standards, developers can create applications that are compatible with a wide range of devices and platforms.</li>
+            <li><strong>Security:</strong> ErebusAPI controls access to URLs, improving network security. This centralized approach to DNS management helps prevent unauthorized access and ensures that all URLs are correctly resolved and routed.</li>
+            <li><strong>Ease of Integration:</strong> Ensures that content is displayed correctly by following the standard file order. This simplifies the development process and ensures that applications are easy to navigate and use.</li>
+        </ul>
+    </div>
+
+    <script>
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            document.body.classList.toggle('light-mode');
+        });
+
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('sidebar-hidden');
+            sidebar.classList.toggle('sidebar-visible');
+        });
+    </script>
+</body>
+</html>
